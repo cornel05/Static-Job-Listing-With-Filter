@@ -1,1 +1,132 @@
-document.addEventListener("DOMContentLoaded",(()=>{const n=document.getElementById("container");let e,t=[];function a(){n.innerHTML="";const o=0===t.length?e:e.filter((n=>function(n,e){return n.every((({tag:n,val:t})=>"languages"===n&&e.languages.includes(t)||"tools"===n&&e.tools.includes(t)||"level"===n&&e.level===t||"role"===n&&e.role===t))}(t,n))),l=o.map((n=>{const e=n.tools.map((n=>`<button class="tools"><span>${n}</span></button>`)).join(""),t=n.languages.map((n=>`<button class="languages"><span>${n}</span></button>`)).join("");return`\n            <div class="job-card">\n              <div class="logo"><img src=${`images/${n.company.toLowerCase()}.svg`} alt="" /></div>\n              <div class="job-details">\n                <div class="new-featured">\n                  ${`<h4>${n.company}</h4>${n.new?"<span class='badge'>New!</span>":""}${n.featured?"<span class='badge featured'>Featured</span>":""}`}\n                </div>\n                <h3>${n.position}</h3>\n                <p>${n.postedAt} <span style="margin: 0 10px">•</span> ${n.contract} <span style="margin: 0 10px">•</span> ${n.location}</p>\n              </div>\n              <div class="tags">\n                <button class="role"><span>${n.role}</span></button>\n                <button class="level"><span>${n.level}</span></button>\n                ${t}\n                ${e}\n              </div>\n            </div>`})).join("");n.insertAdjacentHTML("beforeend",l);document.querySelectorAll(".tags > button").forEach((n=>{n.addEventListener("click",(()=>{const e=n.classList[0],o=n.innerText;t.some((n=>n.tag===e&&n.val===o))||(t.push({tag:e,val:o}),a(),s())}))}))}function s(){const e=t.map(((n,e)=>`<div class="filter-item">${n.val} <button class="remove-btn" data-index="${e}">✖</button></div>`)).join(""),l=`\n        <div class="filter-bar">\n          <div class="filters">${e}</div>\n          <button class="clear-btn">Clear</button>\n        </div>`;n.insertAdjacentHTML("afterbegin",l),document.querySelectorAll(".remove-btn").forEach((n=>n.addEventListener("click",(n=>{const e=n.target.dataset.index;t.splice(e,1),a(),s()})))),0===t.length&&document.querySelector(".filter-bar").remove(),document.querySelector(".clear-btn").addEventListener("click",o)}function o(){t=[],a()}fetch("data.json").then((n=>n.json())).then((t=>{e=t,a(),n.insertAdjacentHTML("beforeend",'<div class="attribution" style="font-size: 1.2rem; margin-top: 10rem;">\n            Challenge by\n            <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"\n              >Frontend Mentor</a\n            >. Coded by\n            <a href="https://github.com/cornel05" target="_blank">cornel05</a>.\n          </div>')})).catch((n=>{console.error(n)}))}));
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("container");
+  let filters = [];
+
+  let jobs;
+  fetch("data.json")
+    .then((res) => res.json())
+    .then((fetchJobs) => {
+      jobs = fetchJobs;
+      filter(); // Initial call to display all jobs
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<div class="attribution" style="font-size: 1.2rem; margin-top: 10rem;">
+            Challenge by
+            <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+              >Frontend Mentor</a
+            >. Coded by
+            <a href="https://github.com/cornel05" target="_blank">cornel05</a>.
+          </div>`
+      );
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+  function filter() {
+    container.innerHTML = ""; // Clear previous job listings
+
+    const filteredJobs =
+      filters.length === 0 ? jobs : jobs.filter((job) => match(filters, job));
+    const jobCards = filteredJobs
+      .map((job) => {
+        const toolsString = job.tools
+          .map((tool) => `<button class="tools"><span>${tool}</span></button>`)
+          .join("");
+        const languagesString = job.languages
+          .map(
+            (language) =>
+              `<button class="languages"><span>${language}</span></button>`
+          )
+          .join("");
+        const imgPath = job.logo;
+        const newFeaturedString = `<h4>${job.company}</h4>${
+          job.new ? "<span class='badge'>New!</span>" : ""
+        }${job.featured ? "<span class='badge featured'>Featured</span>" : ""}`;
+        return `
+            <div class="job-card">
+              <div class="logo"><img src=${imgPath} alt="" /></div>
+              <div class="job-details">
+                <div class="new-featured">
+                  ${newFeaturedString}
+                </div>
+                <h3>${job.position}</h3>
+                <p>${job.postedAt} <span style="margin: 0 10px">•</span> ${job.contract} <span style="margin: 0 10px">•</span> ${job.location}</p>
+              </div>
+              <div class="tags">
+                <button class="role"><span>${job.role}</span></button>
+                <button class="level"><span>${job.level}</span></button>
+                ${languagesString}
+                ${toolsString}
+              </div>
+            </div>`;
+      })
+      .join("");
+
+    container.insertAdjacentHTML("beforeend", jobCards);
+
+    // Add event listeners to the dynamically created buttons
+    const buttons = document.querySelectorAll(".tags > button");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tagName = btn.classList[0];
+        const tagVal = btn.innerText;
+        if (
+          !filters.some(
+            (filter) => filter.tag === tagName && filter.val === tagVal
+          )
+        ) {
+          filters.push({
+            tag: tagName,
+            val: tagVal,
+          });
+          filter();
+          addHeader();
+        }
+      });
+    });
+  }
+
+  function match(filters, job) {
+    return filters.every(({ tag, val }) => {
+      return (
+        (tag === "languages" && job.languages.includes(val)) ||
+        (tag === "tools" && job.tools.includes(val)) ||
+        (tag === "level" && job.level === val) ||
+        (tag === "role" && job.role === val)
+      );
+    });
+  }
+
+  function addHeader() {
+    const filtersString = filters
+      .map(
+        (filter, index) =>
+          `<div class="filter-item">${filter.val} <button class="remove-btn" data-index="${index}">✖</button></div>`
+      )
+      .join("");
+    const HTMLString = `
+        <div class="filter-bar">
+          <div class="filters">${filtersString}</div>
+          <button class="clear-btn">Clear</button>
+        </div>`;
+    container.insertAdjacentHTML("afterbegin", HTMLString);
+
+    document.querySelectorAll(".remove-btn").forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        const index = e.target.dataset.index;
+        filters.splice(index, 1);
+        filter();
+        addHeader();
+      })
+    );
+    if (filters.length === 0) document.querySelector(".filter-bar").remove();
+
+    document.querySelector(".clear-btn").addEventListener("click", clear);
+  }
+
+  function clear() {
+    filters = [];
+    filter();
+  }
+});
