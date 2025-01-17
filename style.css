@@ -223,3 +223,71 @@ h4 {
 .clear-btn:hover {
   background: hsl(180, 14%, 20%);
 }
+
+@media (max-width: 768px) {
+  #header {
+    height: 20vh;
+    margin-bottom: 2rem;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .job-card {
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 90%;
+    padding: 12px;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin: 0 0.5rem 0 0.5rem;
+  }
+
+  .job-details {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .job-details h3 {
+    font-size: 1.2rem;
+  }
+
+  .job-details p {
+    font-size: 0.9rem;
+  }
+
+  .tags {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filter-bar {
+    max-width: 90%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filter-item {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .remove-btn {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .clear-btn {
+    padding: 0.4rem 0.8rem;
+  }
+}
