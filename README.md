@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Frontend Mentor - Job listings with filtering
 
 ![Design preview for the Job listings with filtering coding challenge](./design/desktop-preview.jpg)
@@ -112,3 +113,6 @@ We love receiving feedback! We're always looking to improve our challenges and o
 This challenge is completely free. Please share it with anyone who will find it useful for practice.
 
 **Have fun building!** 🚀
+=======
+# Static-Job-Listing-With-Filter
+>>>>>>> 15cca0ed715542046b6829112736d682f30fa9ff
