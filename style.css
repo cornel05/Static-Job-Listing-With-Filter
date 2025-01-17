@@ -1,0 +1,225 @@
+:root {
+  --desaturated-dark-cyan: hsl(180, 29%, 50%);
+
+  /* Neutral */
+  --light-grayish-cyan-bg: hsl(180, 52%, 96%);
+  --light-grayish-cyan-filter: hsl(180, 31%, 95%);
+  --dark-grayish-cyan: hsl(180, 8%, 52%);
+  --very-dark-grayish-cyan: hsl(180, 14%, 20%);
+}
+
+#header {
+  background: var(--desaturated-dark-cyan) url(images/bg-header-desktop.svg);
+  height: 25vh;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  margin-bottom: 3rem;
+}
+
+body {
+  font-family: League Spartan, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+#container {
+  background-color: var(--light-grayish-cyan-bg);
+  padding: 1rem;
+}
+
+.job-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 65%;
+  margin: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 2px 13px 10px hsla(180, 29%, 50%, 0.1);
+}
+
+.job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 128, 255, 0.25),
+    0 12px 20px rgba(0, 128, 255, 0.2);
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0 1rem 0 1rem;
+}
+
+.job-details {
+  flex-grow: 1;
+  margin-left: 16px;
+}
+
+.job-details h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: -0.5rem;
+}
+
+.job-details p {
+  margin: 10px 0 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.tags {
+  display: flex;
+  gap: 1rem;
+}
+
+.role,
+.languages,
+.level,
+.tools {
+  background-color: var(--light-grayish-cyan-filter);
+  color: var(--desaturated-dark-cyan);
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.tags > button:hover {
+  background-color: var(--desaturated-dark-cyan);
+  color: white;
+}
+
+.new-featured {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--desaturated-dark-cyan);
+  padding: 5px 8px 3px 8px;
+  height: fit-content;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge.featured {
+  background-color: var(--very-dark-grayish-cyan);
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+h4 {
+  color: var(--desaturated-dark-cyan);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#photosnap,
+#manage {
+  border-left: 5px solid var(--desaturated-dark-cyan);
+}
+
+.filter-bar {
+  max-width: 55%; /* Restrict filter bar width */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto 0 auto;
+}
+
+/* Filters Container */
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Individual Filter Item */
+.filter-item {
+  display: flex;
+  align-items: center;
+  background-color: hsl(180, 31%, 95%);
+  color: hsl(180, 29%, 50%);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+/* Remove Button */
+.remove-btn {
+  background: hsl(180, 29%, 50%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove Button Hover */
+.remove-btn:hover {
+  background: hsl(180, 14%, 20%);
+}
+
+/* Clear Button */
+.clear-btn {
+  background: hsl(180, 29%, 50%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Clear Button Hover */
+.clear-btn:hover {
+  background: hsl(180, 14%, 20%);
+}
